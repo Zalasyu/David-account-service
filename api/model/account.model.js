@@ -1,38 +1,38 @@
 const mongoose = require('mongoose');
 
 const accountSchema = new mongoose.Schema({ 
-    "_id": "string",
-    "username": {
-        "type": "string",
-        "required": true,
-        "minlength": 5,
-        "maxlength": 50,
-        "unique": true
+    _id: String,
+    username: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 50,
+        unique: true
     }, 
-    "fName": {
-        "type": "string",
-        "required": true,
+    fName: {
+        type: String,
+        required: true,
     }, 
-    "lName": {
-        "type": "string",
-        "required": true,
+    lName: {
+        type: String,
+        required: true,
     }, 
-    "email": {
-        "type": "string",
-        "required": true,
-        "minlength": 5,
-        "maxlength": 255,
-        "unique": true
+    email: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 255,
+        unique: true
     }, 
-    "password":{
-        "type": "string",
-        "required": true,
-        "minlength": 5,
-        "maxlength": 1024,
+    password:{
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 1024,
     },
-    "role": "string",
-    "profilePic": "string", 
-    "birthDate": "date"
+    role: String,
+    profilePic: String, 
+    birthDate: Date
 });
 
 const Account = mongoose.model('accounts', accountSchema);
