@@ -30,14 +30,6 @@ class AccountService {
     }
 
 }
-// TODO: Do I need Fans, Artist and Venue Controllers?
-
-// **************
-// INHERITANCE
-// **************
-// Venue Service
-// Artist Service
-// Fan Service
 
 module.exports = new AccountService();
 

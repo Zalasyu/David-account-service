@@ -1,28 +1,29 @@
 
 const path = require('path');
 const webpack = require('webpack');
+require('dotenv').config()
 
 const environment = process.env.ENVIRONMENT;
 
 console.log('environment:::::', environment);
 
 let ENVIRONMENT_VARIABLES = {
-  'process.env.ENVIRONMENT': JSON.stringify('development'),
+  'process.env.ENVIRONMENT': JSON.stringify('dev'),
   'process.env.PORT': JSON.stringify('3080'),
-  'process.env.MONGO_CONNECTION_STRING': JSON.stringify('mongodb://mongo-db:27017')
+  'process.env.MONGO_CONNECTION_STRING': JSON.stringify('')
 };
 
-if (environment === 'test') {
+if (environment === 'dev') {
   ENVIRONMENT_VARIABLES = {
-    'process.env.ENVIRONMENT': JSON.stringify('test'),
+    'process.env.ENVIRONMENT': JSON.stringify('dev'),
     'process.env.PORT': JSON.stringify('3080'),
-    'process.env.MONGO_CONNECTION_STRING': JSON.stringify('mongodb://mongo-db:27017')
+    'process.env.MONGO_CONNECTION_STRING': JSON.stringify('')
   };
-} else if (environment === 'production') {
+} else if (environment === 'prod') {
   ENVIRONMENT_VARIABLES = {
-    'process.env.ENVIRONMENT': JSON.stringify('test'),
+    'process.env.ENVIRONMENT': JSON.stringify('prod'),
     'process.env.PORT': JSON.stringify('3080'),
-    'process.env.MONGO_CONNECTION_STRING': JSON.stringify('mongodb+srv://tester:Tester@123@todo-cluster.ys3cf.mongodb.net/tasks?retryWrites=true&w=majority')
+    'process.env.MONGO_CONNECTION_STRING': JSON.stringify('')
   };
 }
 

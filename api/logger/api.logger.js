@@ -1,5 +1,4 @@
-const pine = require('pine');
-
+const pine = require("pine");
 const logger = pine();
 
 

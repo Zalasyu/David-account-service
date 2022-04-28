@@ -1,27 +1,12 @@
 const mongoose = require('mongoose');
 
 const accountSchema = new mongoose.Schema({ 
-    _id: String,
-    username: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 50,
-        unique: true
-    }, 
-    fName: {
-        type: String,
-        required: true,
-    }, 
-    lName: {
-        type: String,
-        required: true,
-    }, 
     email: {
         type: String,
         required: true,
         minlength: 5,
         maxlength: 255,
+        trim: true,
         unique: true
     }, 
     password:{
@@ -30,7 +15,12 @@ const accountSchema = new mongoose.Schema({
         minlength: 5,
         maxlength: 1024,
     },
-    role: String,
+    role: {
+        type: String,
+        default: "fan",
+        enum: ["fan", "artist", "venue"]
+    },
+    accessToken: String,
     profilePic: String, 
     birthDate: Date
 });
