@@ -1,7 +1,7 @@
 // Author: Alec Moldovan
 // Description: Storage of the entity beans in the system
 // The Repository layer is responsible for storing and retrieving some set of data.
-const { connect, disconnect } = require('../config/db.config');
+const { connect } = require('../config/db.config');
 const { Account } = require('../model/account.model');
 const logger = require('../logger/api.logger');
 
