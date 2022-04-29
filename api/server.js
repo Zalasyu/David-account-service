@@ -2,12 +2,13 @@
 
 const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser');
+const cosmo_db_mongo = require("./config/db.config");
+const routes = require("./routes/route");
 require('dotenv').config()
 
-console.log('environment    ', process.env.ENVIRONMENT)
-console.log('PORT    ', process.env.PORT)
-console.log('MONGO_CONNECTION_STRING    ', process.env.MONGO_CONNECTION_STRING)
+console.log('ENV:::', process.env.ENVIRONMENT);
+console.log('PORT:::', process.env.PORT);
+console.log('MONGO_CONNECTION_STRING:::', process.env.MONGO_CONNECTION_STRING)
 
 
 // Custom Libraries
@@ -17,30 +18,43 @@ const accountController = require('./controller/account.controller');
 const app = express();
 const port = process.env.PORT || 3080;
 
+// Connect to Azure Cosmo DB for Mongodb
+cosmo_db_mongo.connect();
+
 app.use(express.static(path.join(__dirname, '../ui/build')));
-app.use(bodyParser.json());
+app.use(express.json());
 
-// CRUD: Routes
-// CREATE: Registration: Basic User info
-app.post('/api/auth/signup', (req, res) => {
-    console.log(req.body);
-    accountController.createAccount(req.body.account).then(data => res.json(data))
-});
+app.use(async (req, res, next) => {
 
-// READ: Get users
-app.get('/api/accounts', (req, res) => {
-    accountController.getAccounts().then(data => res.json(data));
-});
+    // Retrieves the x-access-token header
+    if (req.headers["x-access-token"]) {
 
-// UPDATE: Edit user info (limited)
+        const accessToken = req.headers["x-access-token"];
 
-app.put('/api/account', (req, res) => {
-    accountController.updateAccount(req.body.task).then(data => res.json(data));
+        // Uses the secret key used in the signing th token to verify
+        // that the token has not been compromised
+        const { userId, exp } = await jwt.verify(accessToken, 
+            process.env.JWT_SECRET);
+  
+        // Check if token has expired
+        if (exp < Date.now().valueOf() / 1000) { 
+            return res.status(401).json({ 
+                error: 
+                "JWT token has expired, please login to obtain a new one" 
+            }); 
+        }
+
+        // User's ID is used to retrieve all info on user
+        // The info can then be used by the next middleware.
+        res.locals.loggedInUser = await User.findById(userId); 
+        next(); 
+
+    } else { 
+        next(); 
+    } 
 });
-// DELETE: Delete users
-app.delete('/api/task/:id', (req, res) => {
-    accountController.deleteAccount(req.params.id).then(data => res.json(data));
-});
+ 
+app.use('/', routes);
 
 
 // PORT

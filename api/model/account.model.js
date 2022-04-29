@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 
-const accountSchema = new mongoose.Schema({ 
+// TODO: Find a way to take in a Date Data Type for birthDate field.
+const userSchema = new mongoose.Schema({ 
+    username: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 255,
+        trim: true,
+        unique: true
+    },
     email: {
         type: String,
         required: true,
@@ -22,9 +31,9 @@ const accountSchema = new mongoose.Schema({
     },
     accessToken: String,
     profilePic: String, 
-    birthDate: Date
+    birthDate: String
 });
 
-const Account = mongoose.model('accounts', accountSchema);
+const User = mongoose.model('user', userSchema);
 
-module.exports = { Account };
+module.exports = User;
