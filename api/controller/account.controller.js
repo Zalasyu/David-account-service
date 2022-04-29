@@ -6,6 +6,7 @@
 const User = require('../model/account.model.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const logger = require('../logger/api.logger');
 
 const { roles } = require('../rbac/roles')
 
@@ -79,11 +80,16 @@ async function validatePassword(plainPassword, hashedPassword) {
 
 exports.signup = async (req, res, next) => {
     try {
-        const account = req.body
+        const {username, email, password, role} = req.body
         const hashedPassword = await hashPassword(password);
 
         // Replace plain password with hashed password
-        account.password = hashedPassword;
+        const newUser = new User({ 
+            username,
+            email, 
+            password: hashedPassword, 
+            role: role 
+        });
 
         // Create Access Token
         const accessToken = jwt.sign(
@@ -96,8 +102,9 @@ exports.signup = async (req, res, next) => {
         await newUser.save();
 
         // Respond with the newly minted User info with access token.
+        logger.info("Added a new user:::", newUser.username);
         res.json({
-            data: account,
+            data: newUser,
             accessToken
         })
 
