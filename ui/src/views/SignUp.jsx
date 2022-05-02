@@ -29,7 +29,7 @@ const SignUp = (props) => {
 
 
 
-        axios.post('http://localhost:8000/signup', {
+        axios.post('http://localhost:3080/signup', {
             username, email, password, 
         })
                 .then(res=> console.log(res))
