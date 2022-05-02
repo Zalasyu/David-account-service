@@ -4,6 +4,10 @@ const path = require('path');
 const express = require('express');
 const cosmo_db_mongo = require("./config/db.config");
 const routes = require("./routes/route");
+const jwt = require("jsonwebtoken");
+
+// TODO: Single-File Responsibility Principle Error
+const User = require("./model/account.model");
 require('dotenv').config()
 
 console.log('ENV:::', process.env.ENVIRONMENT);
