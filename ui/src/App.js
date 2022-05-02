@@ -1,11 +1,18 @@
-import logo from './logo.svg';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
+import Dashboard from './views/Dashboard'
+import Login from './views/Login'
+import SignUp from './views/SignUp'
 
 function App() {
   return (
-    <div className="App">
-    </div>
+  <BrowserRouter>
+  <Switch>
+    <Route exact path='/' component={Dashboard} />
+    <Route path='/login' component={Login}/>
+    <Route path='/signup' component={SignUp}/>
+  </Switch>
+  </BrowserRouter>
+
   );
 }
 
