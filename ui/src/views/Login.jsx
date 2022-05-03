@@ -26,7 +26,7 @@ const Login = (props) => {
         e.preventDefault()
 
 
-        axios.post('http://localhost:3080/login/', {
+        axios.post('http://localhost:3080/login', {
              username, password
 
 
