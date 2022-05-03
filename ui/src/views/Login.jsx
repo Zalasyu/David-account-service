@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome} from '@fortawesome/free-solid-svg-icons'
  import '../static/css/Login.css';
- import history from "../components/history";
+ import history from "../helper/history";
 
 const Login = (props) => {
     const [username, setUserName] = useState()
