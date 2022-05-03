@@ -9,7 +9,7 @@ const SignUp = (props) => {
 
 
 
-    // const { id } = useParams();
+    
     const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
