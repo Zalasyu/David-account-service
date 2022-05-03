@@ -31,7 +31,10 @@ const SignUp = (props) => {
 
         axios.post('http://localhost:3080/signup', {
 
+
             username, email, password, role
+
+
 
 
         })
