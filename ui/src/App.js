@@ -7,9 +7,13 @@ function App() {
   return (
   <BrowserRouter>
   <Switch>
-    <Route exact path='/' component={Dashboard} />
-    <Route path='/login' component={Login}/>
+  <Redirect from="/" to="/login" exact/>
+ 
+    
+    <Route path='/login' component={Login} />
+   
     <Route path='/signup' component={SignUp}/>
+    <Route path='/' component={Dashboard}/>
   </Switch>
   </BrowserRouter>
 

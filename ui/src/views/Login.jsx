@@ -7,11 +7,11 @@ import { faHome} from '@fortawesome/free-solid-svg-icons'
 
 const Login = (props) => {
     const [username, setUserName] = useState()
-    const [email, setEmail] = useState()
+   
     const [password, setPassword] = useState(null)
     
     const { id } = useParams();
-    const history = useHistory()
+   
     const [refresh, setRefresh] = useState(true)
 
     // useEffect(()=>{
@@ -25,8 +25,8 @@ const Login = (props) => {
 
         e.preventDefault()
 
-        axios.post('http://localhost:8000/login/', {
-            username, email, password
+        axios.post('http://localhost:3080/login/', {
+             username, password
         })
             .then(res=> console.log(res))
             .catch(err=>{ 
@@ -52,9 +52,9 @@ const Login = (props) => {
             <h1>Login</h1>
             <form onSubmit={onSubmitHandler}>
                 <div className="txt_field">
-                    <input type="text" path="email" required="required" onChange={(e) => setEmail(e.target.value)}  />
+                    <input type="text" path="username" required="required" onChange={(e) => setUserName(e.target.value)}  />
                     <span></span>
-                    <label path="email">Email</label>
+                    <label path="username">Username</label>
                 </div>
                
                 <div className="txt_field">
