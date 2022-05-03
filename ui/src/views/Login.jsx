@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import axios from 'axios';
-import { Link, useHistory, useParams } from 'react-router-dom'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome} from '@fortawesome/free-solid-svg-icons'
  import '../static/css/Login.css';
+ import history from "../helper/history";
 
 const Login = (props) => {
     const [username, setUserName] = useState()
-   
     const [password, setPassword] = useState(null)
-    
-    const { id } = useParams();
+    const [errArray, setErrArray] = useState([])
+  
    
-    const [refresh, setRefresh] = useState(true)
 
-    // useEffect(()=>{
-    //     axios.get('http://localhost:8000/api/user/')
-    //         .then(res=>{
-    //             console.log(res.data)
-    //             })
-    //         .catch(err => console.error(err))
-    // },[refresh]);
+
     const onSubmitHandler = e => {
-
+       
         e.preventDefault()
 
 
@@ -33,15 +26,22 @@ const Login = (props) => {
 
 
         })
-            .then(res=> console.log(res))
+        //redirect to dashboard 
+            .then(res=> {
+                console.log(res)
+                if(res?.status===200)
+            history.push('/dashboard')
+          else
+            alert(res?.message)
+        })
             .catch(err=>{ 
                 console.log(err)
-                // const errResponse = err.response.data.errors 
-                // let tempArr = []
-                // for (const key of Object.keys(errResponse)){
-                //     tempArr.push(errResponse[key].message)
-                // }
-                // setErrArray(tempArr)
+                const errResponse = err.response.data.errors 
+                let tempArr = []
+                for (const key of Object.keys(errResponse)){
+                    tempArr.push(errResponse[key].message)
+                }
+                setErrArray(tempArr)
 
   
         })
@@ -74,7 +74,7 @@ const Login = (props) => {
                     Not a member?<a className="active1" href="/signup">Sign up</a>
                 </div>
             </form>
-
+            {errArray.map((err, i) => (<p key={i}> {err}</p>))}  
         </div>
         </div></>
     )

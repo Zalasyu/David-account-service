@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { Link, useHistory } from 'react-router-dom'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome} from '@fortawesome/free-solid-svg-icons'
 import '../static/css/Login.css'
@@ -14,9 +14,6 @@ const SignUp = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
-  
-
-    
     const [errArray, setErrArray] = useState([])
 
     const onSubmitHandler = e => {
