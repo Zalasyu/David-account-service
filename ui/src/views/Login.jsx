@@ -25,8 +25,11 @@ const Login = (props) => {
 
         e.preventDefault()
 
+
         axios.post('http://localhost:3080/login/', {
              username, password
+
+
         })
             .then(res=> console.log(res))
             .catch(err=>{ 
