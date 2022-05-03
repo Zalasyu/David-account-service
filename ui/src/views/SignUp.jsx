@@ -30,7 +30,7 @@ const SignUp = (props) => {
 
 
         axios.post('http://localhost:3080/signup', {
-            username, email, password, 
+            username, email, password, role
         })
                 .then(res=> console.log(res))
                 .catch(err=>{ 
