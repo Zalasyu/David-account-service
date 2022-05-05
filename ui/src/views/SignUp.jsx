@@ -39,12 +39,7 @@ const SignUp = (props) => {
                 .catch(err=>{ 
                     console.log(err)
                    
-                     const errResponse = err.response.data.errors 
-                     let tempArr = []
-                     for (const key of Object.keys(errResponse)){
-                         tempArr.push(errResponse[key].message)
-                     }
-                     setErrArray(tempArr)
+                   
 
         })
     }
@@ -104,7 +99,7 @@ const SignUp = (props) => {
                 </div>
 
             </form>
-            {errArray.map((err, i) => (<p key={i}> {err}</p>))}  
+            
         </div>
         </div></>
     )
