@@ -118,12 +118,13 @@ exports.login = async (req, res, next) => {
     try {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
-        
-        if (!user) return next(new Error('Username does not exist'));
-        
         const validPassword = await validatePassword(password, user.password);
 
-        if (!validPassword) return next(new Error('Password is not correct'))
+        if (!validPassword || !user){
+            return res.json(
+                {Error : 
+                "Username or password is incorrect. Try Again."});
+        }
 
         const accessToken = jwt.sign(
         { userId: user._id }, 
