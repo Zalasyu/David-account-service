@@ -7,7 +7,7 @@ function Navbar() {
     return (
         <><nav className="navbar">
           <ul>
-            <a className="active" href="/"><FontAwesomeIcon className='icon' icon={faHome} /> Home</a>
+            <a className="active" href="/dashboard"><FontAwesomeIcon className='icon' icon={faHome} /> Home</a>
             
            
             <li><input type="search" placeholder="search product" id="search" />

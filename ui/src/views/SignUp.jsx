@@ -56,7 +56,7 @@ const SignUp = (props) => {
         
         <><div className='body'>
                  <div className="home">
-                 <a className="active" href="/"><FontAwesomeIcon className='icon' icon={faHome} /> Home</a>
+                 <a className="active" href="/dashboard"><FontAwesomeIcon className='icon' icon={faHome} /> Home</a>
  </div>
         <div className="center">
             <h1>Sign Up</h1>
