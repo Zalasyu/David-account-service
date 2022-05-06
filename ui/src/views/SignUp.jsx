@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Artist from '../components/Artist'
+import Fan from '../components/Fan'
+import Venue from '../components/Venue'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome} from '@fortawesome/free-solid-svg-icons'
 import '../static/css/Login.css'
@@ -13,14 +15,18 @@ const SignUp = (props) => {
     const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState('selectRole');
     //boolean to check for artist, fan, or venue
     const [artistContentVisible, setArtistContentVisible] = useState(false);
+    const [fanContentVisible, setFanContentVisible] = useState(false);
+    const [venueContentVisible, setVenueContentVisible] = useState(false);
     
 
     useEffect(() =>{
-        role ===""
-    })
+        role ==="artist" ? setArtistContentVisible(true) : setArtistContentVisible(false);
+        role ==="fan" ? setFanContentVisible(true) : setFanContentVisible(false);
+        role ==="venue" ? setVenueContentVisible(true) : setVenueContentVisible(false);
+    }, [role]);
 
 
     const onSubmitHandler = e => {
@@ -98,6 +104,8 @@ const SignUp = (props) => {
 
                 </div>
                 {artistContentVisible && <Artist/>}
+                {fanContentVisible && <Fan/>}
+                {venueContentVisible && <Venue/>}
 
                 <input type="submit" id="completed" value="SignUp" />
 
