@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import Artist from '../components/Artist'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome} from '@fortawesome/free-solid-svg-icons'
 import '../static/css/Login.css'
@@ -14,7 +14,14 @@ const SignUp = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
-    const [errArray, setErrArray] = useState([])
+    //boolean to check for artist, fan, or venue
+    const [artistContentVisible, setArtistContentVisible] = useState(false);
+    
+
+    useEffect(() =>{
+        role ===""
+    })
+
 
     const onSubmitHandler = e => {
 
@@ -78,19 +85,19 @@ const SignUp = (props) => {
 
 
                 <div className="role_field">
-                {/* <label>
-              Assign To */}
+             
           <select name="role" id="role" onChange={(e) => setRole(e.target.value)}>
-                    <option hidden="">Select a Role</option> 
-                    <option value="fan">Fan</option>
+                    <option hidden="selectRole">Select a Role</option> 
                     <option value="artist">Artist</option>
+                    <option value="fan">Fan</option>
                     <option value="venue">Venue</option>
                    
                 </select>
-                {/* </label> */}
+              
 
 
                 </div>
+                {artistContentVisible && <Artist/>}
 
                 <input type="submit" id="completed" value="SignUp" />
 
