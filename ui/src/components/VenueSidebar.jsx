@@ -10,54 +10,55 @@ import { BsCartCheck } from "react-icons/bs";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
+import '../static/css/Sidebar.css';
 const routes = [
   {
-    path: "/",
+    path: "/dashboard",
     name: "Dashboard",
     icon: <FaHome />,
   },
   {
-    path: "/users",
-    name: "Users",
+    path: "/events",
+    name: "Events",
     icon: <FaUser />,
   },
   {
-    path: "/messages",
-    name: "Messages",
+    path: "/eventsnearyou",
+    name: "Events near you",
     icon: <MdMessage />,
   },
   {
-    path: "/analytics",
-    name: "Analytics",
+    path: "/fansnearyou",
+    name: "Fans near you",
     icon: <BiAnalyse />,
   },
-  {
-    path: "/file-manager",
-    name: "File Manager",
-    icon: <AiTwotoneFileExclamation />,
-    subRoutes: [
-      {
-        path: "/settings/profile",
-        name: "Profile ",
-        icon: <FaUser />,
-      },
-      {
-        path: "/settings/2fa",
-        name: "2FA",
-        icon: <FaLock />,
-      },
-      {
-        path: "/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
-      },
-    ],
-  },
-  {
-    path: "/order",
-    name: "Order",
-    icon: <BsCartCheck />,
-  },
+//   {
+//     path: "/file-manager",
+//     name: "File Manager",
+//     icon: <AiTwotoneFileExclamation />,
+//     subRoutes: [
+//       {
+//         path: "/settings/profile",
+//         name: "Profile ",
+//         icon: <FaUser />,
+//       },
+//       {
+//         path: "/settings/2fa",
+//         name: "2FA",
+//         icon: <FaLock />,
+//       },
+//       {
+//         path: "/settings/billing",
+//         name: "Billing",
+//         icon: <FaMoneyBill />,
+//       },
+//     ],
+//   },
+//   {
+//     path: "/order",
+//     name: "Order",
+//     icon: <BsCartCheck />,
+//   },
   {
     path: "/settings",
     name: "Settings",
@@ -82,8 +83,8 @@ const routes = [
     ],
   },
   {
-    path: "/saved",
-    name: "Saved",
+    path: "/support",
+    name: "Support",
     icon: <AiFillHeart />,
   },
 ];
