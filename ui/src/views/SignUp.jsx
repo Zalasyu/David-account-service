@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Artist from '../components/Artist'
-import Fan from '../components/Fan'
-import Venue from '../components/Venue'
+import Artist from '../components/ArtistSidebar'
+import Fan from '../components/FanSidebar'
+import Venue from '../components/VenueSidebar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import '../static/css/Login.css'
@@ -104,7 +104,7 @@ const SignUp = (props) => {
 
                     </div>
                     <div className="role_field">
-                        
+
                         {/* conditional rendering depending on which role is selected */}
                         {artistContentVisible && <Artist />}
                         {fanContentVisible && <Fan />}
