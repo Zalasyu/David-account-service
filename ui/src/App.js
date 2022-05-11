@@ -16,6 +16,7 @@ function App() {
     <BrowserRouter>
        <VenueSideBar/>
         <Switch>
+        <Route path='/dashboard' component={Dashboard} />
           <Route path="/artistnearyou" component={ArtistNear } />
           <Route path="/events" component={Events } />
           <Route path="/eventsnearyou" component={EventsNear} />
@@ -29,7 +30,7 @@ function App() {
         <Redirect from="/" to="/login" exact />
         <Route path='/signup' component={SignUp} />
         <Route path='/login' component={Login} />
-        <Route path='/dashboard' component={Dashboard} />
+       
 
       </Switch>
    
