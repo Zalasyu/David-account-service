@@ -10,11 +10,13 @@ import EventsNear from './views/VenueSidebar/EventsNear'
 import FansNear from './views/VenueSidebar/FansNear'
 import Support from './views/VenueSidebar/Support'
 
+
+
 function App() {
 
   return (
     <BrowserRouter>
-       <VenueSideBar/>
+      {/* routes for the sidebar */}
         <Switch>
         <Route path='/dashboard' component={Dashboard} />
           <Route path="/artistnearyou" component={ArtistNear } />
@@ -22,9 +24,9 @@ function App() {
           <Route path="/eventsnearyou" component={EventsNear} />
           <Route path="/fansnearyou" component={FansNear } />
           <Route path="/support" component={Support} />
-          {/* <Route path="*" component={<> not found</>} /> */}
+         
         </Switch>
-     
+        
       <Switch>
 
         <Redirect from="/" to="/login" exact />
