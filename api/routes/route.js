@@ -8,7 +8,7 @@ const router = express.Router();
 // CREATE: Create a user account
 router.post('/signup', userController.signup);
 
-// READ: Authenticate User login
+// Authenticate User login
 router.post('/login', userController.login);
 
 // READ: Get User info

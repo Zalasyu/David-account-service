@@ -142,7 +142,7 @@ exports.login = async (req, res, next) => {
 
 // ***********************************
 // BUSINESS LOGIC: CRUD ROUTES
-// Will be plugged in as middleware 
+// Will be plugged in as middleware
 // for the various routes
 // ***********************************
 exports.getUsers = async (req, res, next) => {
@@ -163,7 +163,7 @@ exports.getUser = async (req, res, next) => {
             data: user
         });
 
-    } 
+    }
     catch (error) {
         next(error)
     }
@@ -173,11 +173,11 @@ exports.updateUser = async (req, res, next) => {
     try {
         const update = req.body
         const userId = req.params.userId;
-        
+
         await User.findByIdAndUpdate(userId, update);
-        
+
         const user = await User.findById(userId)
-        
+
         res.status(200).json({
             data: user,
             message: 'User has been updated'
@@ -190,9 +190,9 @@ exports.updateUser = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
     try {
         const userId = req.params.userId;
-        
+
         await User.findByIdAndDelete(userId);
-        
+
         res.status(200).json({
             data: null,
             message: 'User has been deleted'

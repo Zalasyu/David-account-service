@@ -1,4 +1,10 @@
 const mongoose = require('mongoose');
+const fanSchema = new mongoose.Schema({
+
+
+
+
+});
 
 // TODO: Find a way to take in a Date Data Type for birthDate field.
 const userSchema = new mongoose.Schema({ 
