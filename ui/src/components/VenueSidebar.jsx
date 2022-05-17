@@ -134,7 +134,7 @@ const VenueSideBar = ({ children }) => {
               <FaBars onClick={toggle} />
             </div>
           </div>
-          <div className="search">
+          {/* <div className="search">
             <div className="search_icon">
               <BiSearch />
             </div>
@@ -150,7 +150,7 @@ const VenueSideBar = ({ children }) => {
                 />
               )}
             </AnimatePresence>
-          </div>
+          </div> */}
           <section className="routes">
             {routes.map((route, index) => {
               if (route.subRoutes) {
