@@ -1,9 +1,7 @@
 import { BrowserRouter, Route, Redirect, Switch, Routes } from 'react-router-dom'
 
 import Dashboard from './views/Dashboard'
-import Login from './views/Login'
-import SignUp from './views/SignUp'
-import VenueSideBar from './components/VenueSidebar'
+
 import ArtistNear from './views/VenueSidebar/ArtistNear'
 import Events from './views/VenueSidebar/Events'
 import EventsNear from './views/VenueSidebar/EventsNear'
@@ -16,9 +14,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* routes for the sidebar */}
+     
         <Switch>
+        <Redirect from="/" to="/dashboard" exact />
         <Route path='/dashboard' component={Dashboard} />
+
+         {/* routes for the sidebar */}
           <Route path="/artistnearyou" component={ArtistNear } />
           <Route path="/events" component={Events } />
           <Route path="/eventsnearyou" component={EventsNear} />
@@ -27,14 +28,7 @@ function App() {
          
         </Switch>
         
-      <Switch>
-
-        <Redirect from="/" to="/login" exact />
-        <Route path='/signup' component={SignUp} />
-        <Route path='/login' component={Login} />
-       
-
-      </Switch>
+   
    
     </BrowserRouter>
 
