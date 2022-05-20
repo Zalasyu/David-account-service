@@ -2,10 +2,10 @@
    
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
-import { MdMessage } from "react-icons/md";
-import { BiAnalyse, BiSearch } from "react-icons/bi";
+import { MdLocationOn, MdOutlineContactSupport } from "react-icons/md";
+import { BsPeopleFill, BsFillExclamationCircleFill } from "react-icons/bs"
 import { BiCog } from "react-icons/bi";
-import { AiFillHeart,  } from "react-icons/ai";
+//  import { AiFillHeart  } from "react-icons/ai";
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -20,17 +20,17 @@ const routes = [
   {
     path: "/events",
     name: "Events",
-    icon: <FaUser />,
+    icon: <BsFillExclamationCircleFill />,
   },
   {
     path: "/eventsnearyou",
     name: "Events near you",
-    icon: <MdMessage />,
+    icon: <MdLocationOn/>,
   },
   {
     path: "/fansnearyou",
     name: "Fans near you",
-    icon: <BiAnalyse />,
+    icon: <BsPeopleFill/>,
   },
 
   {
@@ -59,7 +59,7 @@ const routes = [
   {
     path: "/support",
     name: "Support",
-    icon: <AiFillHeart />,
+    icon: <MdOutlineContactSupport />,
   },
 ];
 
