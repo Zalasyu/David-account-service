@@ -1,16 +1,15 @@
-
-   
-import { NavLink } from "react-router-dom";
+//react icon imports
 import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
 import { MdLocationOn, MdOutlineContactSupport } from "react-icons/md";
 import { BsPeopleFill, BsFillExclamationCircleFill } from "react-icons/bs"
 import { BiCog } from "react-icons/bi";
-//  import { AiFillHeart  } from "react-icons/ai";
-
+//react icon imports ends here
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
 import '../static/css/Sidebar.css';
+
 const routes = [
   {
     path: "/dashboard",
