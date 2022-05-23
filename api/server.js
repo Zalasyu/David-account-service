@@ -15,7 +15,7 @@ const app = express()
 const port = process.env.PORT || 3080
 
 
-app.use(express.static(path.join(__dirname, '../ui/build')))
+app.use(express.static(path.join(__dirname, '../ui')))
 app.use(express.json())
 app.use(cors())
 
