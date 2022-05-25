@@ -4,11 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// Tell React to leverage on MSAL instances when the app starts
+import { PublicClientApplication } from "@azure/msal-browser";
+import { msalConfig } from './auth/authConfig';
+
+// Tell ReactDOM to use this configuration and MSAL instance
+export const msalInstance = new PublicClientApplication(msalConfig);
+
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <App msalInstance={msalInstance}/>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
