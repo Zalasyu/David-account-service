@@ -109,7 +109,7 @@ const VenueSideBar = ({ children }) => {
             transition: {
               duration: 0.5,
               type: "spring",
-              damping: 10,
+              damping: 15,
             },
           }}
           className={`sidebar `}

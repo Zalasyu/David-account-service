@@ -2,13 +2,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+   
   }
   
   .main-container {
     display: flex;
+    
   }
   main {
     padding: 10px;
+    
   }
   
   .title {
@@ -23,6 +26,7 @@
     color: white;
     height: 100vh;
     overflow-y: auto;
+    overflow: hidden;
   }
   
   .top_section {
@@ -42,13 +46,13 @@
     display: none;
   }
   
-  .search {
+  /* .search {
     display: flex;
     align-items: center;
     margin: 10px 0;
     height: 30px;
     padding: 10px;
-  }
+  } */
   /* .search input {
     border: none;
     margin-left: 10px;
