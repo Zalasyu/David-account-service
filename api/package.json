@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon -L ./server.js localhost 3080",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "prod": "node dist/api.bundle.js",
     "build": "webpack"
   },

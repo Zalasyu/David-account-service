@@ -23,7 +23,7 @@ const options = {
     validateIssuer: config.settings.validateIssuer,
     loggingLevel: config.settings.loggingLevel,
     passReqToCallback: config.settings.passReqToCallback,
-    scope: config.protectedRoutes.hello.scopes
+    scope: config.protectedRoutes.dashboard.scopes
 }
 
 // Instantiate the passport Azure AD library with the Azure AD B2C options
@@ -86,3 +86,5 @@ const port = process.env.PORT || 3080
 app.listen(port, () => {
   console.log(`Server listening on the port  ${port}`)
 })
+
+module.exports = app;

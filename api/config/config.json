@@ -10,7 +10,7 @@
     "protectedRoutes": {
         "dashboard": {
             "endpoint": "dashboard",
-            "scope": ["dash.previewRead"]
+            "scopes": ["dash.previewRead"]
         }
     },
     "metadata": {

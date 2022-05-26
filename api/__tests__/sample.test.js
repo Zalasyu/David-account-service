@@ -11,7 +11,7 @@ describe('Sample Test', () => {
 
 describe('Sanitize configuration object', () => {
     beforeAll(() => {
-        global.config = require('./config.json');
+        global.config = require('../config/config.json');
     });
 
     it('should define the config object', () => {
@@ -35,9 +35,9 @@ describe('Ensure pages served', () => {
         process.env.NODE_ENV = 'test';
     });
 
-    it('should protect hello endpoint', async () => {
+    it('should protect dashboard endpoint', async () => {
         const res = await request(app)
-            .get('/hello');
+            .get('/dashboard');
 
         expect(res.statusCode).toEqual(401);
     });
