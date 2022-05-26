@@ -22,7 +22,8 @@ const options = {
     isB2C: config.settings.isB2C,
     validateIssuer: config.settings.validateIssuer,
     loggingLevel: config.settings.loggingLevel,
-    passReqToCallback: config.settings.passReqToCallback
+    passReqToCallback: config.settings.passReqToCallback,
+    scope: config.protectedRoutes.hello.scopes
 }
 
 // Instantiate the passport Azure AD library with the Azure AD B2C options

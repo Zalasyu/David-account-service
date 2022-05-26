@@ -7,10 +7,14 @@
     "policies": {
         "policyName": "B2C_1A_SIGNUP_SIGNIN"
     },
-    "resource": {
-        "scope": ["dash.previewRead"]
+    "protectedRoutes": {
+        "dashboard": {
+            "endpoint": "dashboard",
+            "scope": ["dash.previewRead"]
+        }
     },
     "metadata": {
+        "b2cDomain": "projectcentredavidev.b2clogin.com",
         "discovery": ".well-known/openid-configuration",
         "version": "v2.0"
     },
