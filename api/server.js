@@ -50,6 +50,11 @@ app.use(express.json())
 
 app.use(cors())
 
+// CORS Settings
+// Cross-origin Resource sharing is enables for all domains
+// This is insecure
+// TODO: In production, we need to modify this to allow only the domains
+// that we designate.
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept')
@@ -61,6 +66,10 @@ app.use((req, res, next) => {
 app.get('/public', (req, res) => res.send({ 'test-date': new Date() }))
 
 // Protected Endpoint
+// passport-azure-ad validates the token against the:
+// issuer, scope, audience claims 
+// (defined in BearerStrategy constructor)
+// By using the passport.authenticate() API
 app.get('/dashboard',
   passport.authenticate('oauth-bearer', { session: false }),
   (req, res) => {

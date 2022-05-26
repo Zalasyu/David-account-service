@@ -1,5 +1,25 @@
 import { LogLevel } from "@azure/msal-browser";
 
+const b2cPolicies = {
+    names: {
+        signUpSignIn: "B2C_1A_SIGNUP_SIGNIN",
+        forgotPassword: "B2C_1A_PASSWORDRESET",
+        editProfile: "B2C_1A_PROFILEEDIT"
+    },
+    authorities: {
+        signUpSignIn: {
+            authority: "https://projectcentredavidev.b2clogin.com/projectcentredavidev.onmicrosoft.com/B2C_1A_SIGNUP_SIGNIN",
+        },
+        forgotPassword: {
+            authority: "https://projectcentredavidev.b2clogin.com/projectcentredavidev.onmicrosoft.com/B2C_1A_PASSWORDRESET",
+        },
+        editProfile: {
+            authority: "https://projectcentredavidev.b2clogin.com/projectcentredavidev.onmicrosoft.com/B2C_1A_PROFILEEDIT"
+        }
+    },
+    authorityDomain: "projectcentredavidev.b2clogin.com"
+}
+
 /**
  * Configuration object to be passed to MSAL instance on creation. 
  * For a full list of MSAL.js configuration parameters, visit:
@@ -8,13 +28,14 @@ import { LogLevel } from "@azure/msal-browser";
 export const msalConfig = {
     auth: {
         clientId: "3be2544f-540f-43b7-a7a5-231fe8e7b3ca", // This is the ONLY mandatory field that you need to supply.
-        authority: "https://login.microsoftonline.com/projectcentredavidev", // Defaults to "https://login.microsoftonline.com/common"
-        redirectUri: "http://localhost:3000", // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
+        authority: b2cPolicies.authorities.signUpSignIn.authority, // Use a sign-up/sign-in user-flow as a default directory
+        knownAuthorities: [b2cPolicies.authorityDomain], // Mark our B2C tenant's domain as trusted.
+        redirectUri: "/", // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
         postLogoutRedirectUri: "/", // Indicates the page to navigate after logout.
-        navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
+        navigateToLoginRequestUrl: false // If "true", will navigate back to the original request location before processing the auth code response.
     },
     cache: {
-        cacheLocation: "localStorage", // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
+        cacheLocation: "sessionStorage", // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
     },
     system: {
@@ -51,6 +72,17 @@ export const msalConfig = {
 export const loginRequest = {
     scopes: []
 };
+
+/**
+ * An optional silentRequest object
+ * can be used to achieve silent SSO
+ * between applications providing a 
+ * "login_hint" property
+ */
+export const silentRequest = {
+    scopes: ["openid", "profile"],
+    loginHint: "example@domain.net"
+}
 
 /**
  * Add here the endpoints and scopes when obtaining an access token for protected web APIs. For more information, see:
