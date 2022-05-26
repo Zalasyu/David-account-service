@@ -1,10 +1,10 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import VenueSideBar from '../components/VenueSidebar';
-import '../static/css/Dashboard.css';
+import '../styles/Dashboard.css';
 
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
       <>
       <div className='dashboard'>
@@ -13,9 +13,16 @@ const Dashboard = () => {
      </div>
      <div className='content'>
      
-      <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae possimus assumenda reprehenderit voluptatibus at fugit atque! 
-        Optio, minus aliquid vitae debitis inventore, veritatis ad non recusandae explicabo officia numquam eius. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio pariatur facere ullam minima cupiditate 
-        repellat assumenda tempora magnam molestias? Praesentium error natus similique repellendus commodi, velit illum illo aperiam odio!</h1>
+      <h1>
+        This area will be populated by containers.
+        Each container will communicate with a different service.
+        A subset of data will be communicated from the service.
+        Then each container will display some data visualization
+        and/or some summary of what this service is about.
+        In addition, when a user clicks on a container they will
+        enter into that very service that will have a different UI.
+      </h1>
+      
        
     <div className='page-wrapper'></div>
       <Footer />

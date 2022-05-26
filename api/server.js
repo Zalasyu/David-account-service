@@ -1,70 +1,87 @@
 // Author: Alec Moldovan
 
-const path = require('path');
-const express = require('express');
-const cosmo_db_mongo = require("./config/db.config");
-const routes = require("./routes/route");
-const jwt = require("jsonwebtoken");
+const path = require('path')
+const express = require('express')
 const cors = require('cors')
+const passport = require('passport')
+const morgan = require('morgan')
+const config = require('./config/config.json')
 
-// TODO: Single-File Responsibility Principle Error
-const User = require("./model/account.model");
+// Import environment variables
 require('dotenv').config()
 
-console.log('ENV:::', process.env.ENVIRONMENT);
-console.log('PORT:::', process.env.PORT);
-console.log('MONGO_CONNECTION_STRING:::', process.env.MONGO_CONNECTION_STRING)
+// Import the passport Azure AD Library
+const BearerStrategy = require('passport-azure-ad').BearerStrategy
 
+// Sets the Azure AD B2C options
+const options = {
+    identityMetadata: `https://${config.credentials.tenantName}.b2clogin.com/${config.credentials.tenantName}.onmicrosoft.com/${config.policies.policyName}/${config.metadata.version}/${config.metadata.discovery}`,
+    clientID: config.credentials.clientID,
+    audience: config.credentials.clientID,
+    policyName: config.policies.policyName,
+    isB2C: config.settings.isB2C,
+    validateIssuer: config.settings.validateIssuer,
+    loggingLevel: config.settings.loggingLevel,
+    passReqToCallback: config.settings.passReqToCallback
+}
 
-// Custom Libraries
-const accountController = require('./controller/account.controller');
+// Instantiate the passport Azure AD library with the Azure AD B2C options
+const bearerStrategy = new BearerStrategy(options, (token, done) => {
+  // Send user info using the second argument.
+  done(null, { }, token)
+})
 
+// Print to stdout the envionment and port that the app is running in.
+console.log('ENV:::', process.env.ENVIRONMENT)
+console.log('PORT:::', process.env.PORT)
 
-const app = express();
-const port = process.env.PORT || 3080;
+const app = express()
 
-// Connect to Azure Cosmo DB for Mongodb
-cosmo_db_mongo.connect();
+app.use(morgan('dev'))
 
-app.use(express.static(path.join(__dirname, '../ui/build')));
-app.use(express.json());
-app.use(cors());
+app.use(passport.initialize())
 
-app.use(async (req, res, next) => {
+passport.use(bearerStrategy)
 
-    // Retrieves the x-access-token header
-    if (req.headers["x-access-token"]) {
+// Connect frontend to backend 
+// app.use(express.static(path.join(__dirname, '../ui')))
 
-        const accessToken = req.headers["x-access-token"];
+app.use(express.json())
 
-        // Uses the secret key used in the signing th token to verify
-        // that the token has not been compromised
-        const { userId, exp } = await jwt.verify(accessToken, 
-            process.env.JWT_SECRET);
-  
-        // Check if token has expired
-        if (exp < Date.now().valueOf() / 1000) { 
-            return res.status(401).json({ 
-                error: 
-                "JWT token has expired, please login to obtain a new one" 
-            }); 
-        }
+app.use(cors())
 
-        // User's ID is used to retrieve all info on user
-        // The info can then be used by the next middleware.
-        res.locals.loggedInUser = await User.findById(userId); 
-        next(); 
+// CORS Settings
+// Cross-origin Resource sharing is enables for all domains
+// This is insecure
+// TODO: In production, we need to modify this to allow only the domains
+// that we designate.
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
 
-    } else { 
-        next(); 
-    } 
-});
- 
-app.use('/', routes);
+// Add EndPoints
+// Anonymous endpoint
+app.get('/public', (req, res) => res.send({ 'test-date': new Date() }))
 
+// Protected Endpoint
+// passport-azure-ad validates the token against the:
+// issuer, scope, audience claims 
+// (defined in BearerStrategy constructor)
+// By using the passport.authenticate() API
+app.get('/dashboard',
+  passport.authenticate('oauth-bearer', { session: false }),
+  (req, res) => {
+    console.log('Validated claims: ', req.authInfo)
 
-// PORT
+    // Service relies on the name claim
+    res.status(200).json({ 'test-name': req.authInfo['name'] })
+  })
+
+// Starts listenting on port 3080
+const port = process.env.PORT || 3080
 
 app.listen(port, () => {
-    console.log(`Server listening on the port  ${port}`);
-});
+  console.log(`Server listening on the port  ${port}`)
+})
