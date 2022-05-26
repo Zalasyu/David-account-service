@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
-import '../static/css/Sidebar.css';
+import '../styles/Sidebar.css';
 
 const routes = [
   {

@@ -4,8 +4,8 @@ import { MsalProvider } from "@azure/msal-react";
 
 import { PageLayout } from "./components/PageLayout.jsx";
 
-import Dashboard from './views/Dashboard';
-import Profile from './views/Profile'
+import { Dashboard } from './views/Dashboard';
+import { Profile } from './views/Profile'
 import VenueSideBar from './components/VenueSidebar'
 import ArtistNear from './views/VenueSidebar/ArtistNear'
 import Events from './views/VenueSidebar/Events'

@@ -2,7 +2,7 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/
 
 import { Nav, Navbar, Button, Dropdown, DropdownButton} from "react-bootstrap";
 
-import { loginRequest } from "../authConfig";
+import { loginRequest } from "../auth/authConfig";
 
 export const NavigationBar = () => {
 

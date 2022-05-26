@@ -1,10 +1,10 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import VenueSideBar from '../components/VenueSidebar';
-import '../static/css/Dashboard.css';
+import '../styles/Dashboard.css';
 
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
       <>
       <div className='dashboard'>

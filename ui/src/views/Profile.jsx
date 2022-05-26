@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { MsalAuthenticationTemplate, useMsal, useAccount } from "@azure/msal-react";
 import { InteractionRequiredAuthError, InteractionType } from "@azure/msal-browser";
 
-import { loginRequest, protectedResources } from "../authConfig";
+import { loginRequest, protectedResources } from "../auth/authConfig";
 import { callApiWithToken } from "../fetch";
 import { ProfileData } from "../components/DataDisplay";
 
@@ -57,9 +57,7 @@ const ProfileContent = () => {
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/getting-started.md
  */
 export const Profile = () => {
-    const authRequest = {
-        ...loginRequest
-    };
+    const authRequest = { ...loginRequest };
 
     return (
         <MsalAuthenticationTemplate 
