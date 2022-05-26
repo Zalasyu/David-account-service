@@ -9,7 +9,7 @@
     },
     "protectedRoutes": {
         "dashboard": {
-            "endpoint": "dashboard",
+            "endpoint": "/dashboard",
             "scopes": ["dash.previewRead"]
         }
     },
