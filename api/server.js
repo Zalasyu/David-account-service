@@ -1,10 +1,9 @@
 // Author: Alec Moldovan
 
-const path = require('path')
 const express = require('express')
 const cors = require('cors')
 const passport = require('passport')
-const morgan = require('morgan')
+const logger = require('morgan')
 const config = require('./config/config.json')
 
 // Import environment variables
@@ -15,21 +14,21 @@ const BearerStrategy = require('passport-azure-ad').BearerStrategy
 
 // Sets the Azure AD B2C options
 const options = {
-    identityMetadata: `https://${config.credentials.tenantName}.b2clogin.com/${config.credentials.tenantName}.onmicrosoft.com/${config.policies.policyName}/${config.metadata.version}/${config.metadata.discovery}`,
-    clientID: config.credentials.clientID,
-    audience: config.credentials.clientID,
-    policyName: config.policies.policyName,
-    isB2C: config.settings.isB2C,
-    validateIssuer: config.settings.validateIssuer,
-    loggingLevel: config.settings.loggingLevel,
-    passReqToCallback: config.settings.passReqToCallback,
-    scope: config.protectedRoutes.dashboard.scopes
+  identityMetadata: `https://${config.credentials.tenantName}.b2clogin.com/${config.credentials.tenantName}.onmicrosoft.com/${config.policies.policyName}/${config.metadata.version}/${config.metadata.discovery}`,
+  clientID: config.credentials.clientID,
+  audience: config.credentials.clientID,
+  policyName: config.policies.policyName,
+  isB2C: config.settings.isB2C,
+  validateIssuer: config.settings.validateIssuer,
+  loggingLevel: config.settings.loggingLevel,
+  passReqToCallback: config.settings.passReqToCallback,
+  scope: config.protectedRoutes.dashboard.scopes
 }
 
 // Instantiate the passport Azure AD library with the Azure AD B2C options
 const bearerStrategy = new BearerStrategy(options, (token, done) => {
   // Send user info using the second argument.
-  done(null, { }, token)
+  log.in
 })
 
 // Print to stdout the envionment and port that the app is running in.
@@ -38,14 +37,11 @@ console.log('PORT:::', process.env.PORT)
 
 const app = express()
 
-app.use(morgan('dev'))
+app.use(logger('dev'))
 
 app.use(passport.initialize())
 
 passport.use(bearerStrategy)
-
-// Connect frontend to backend 
-// app.use(express.static(path.join(__dirname, '../ui')))
 
 app.use(express.json())
 
@@ -77,8 +73,14 @@ app.get('/dashboard',
     console.log('Validated claims: ', req.authInfo)
 
     // Service relies on the name claim
-    res.status(200).json({ 'test-name': req.authInfo['name'] })
-  })
+    res.status(200).json({
+      'name': req.authInfo['name'],
+      'issued-by': req.authInfo['iss'],
+      'issued-for': req.authInfo['aud'],
+      'scope': req.authInfo['scp']
+    });
+  }
+)
 
 // Starts listenting on port 3080
 const port = process.env.PORT || 3080

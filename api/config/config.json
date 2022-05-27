@@ -2,16 +2,10 @@
     "credentials": {
         "tenantName": "projectcentredavidev.onmicrosoft.com",
         "clientID": "8e75d735-3a31-4f44-b8b3-292cb7f10324",
-        "issuer": "https://projectcentredavidev.b2clogin.com/projectcentredavidev/v2.0/"
+        "issuer": "https://projectcentredavidev.b2clogin.com/deb74ed9-329d-4a0b-8a37-c9cb058450a9/v2.0/"
     },
     "policies": {
         "policyName": "B2C_1A_SIGNUP_SIGNIN"
-    },
-    "protectedRoutes": {
-        "dashboard": {
-            "endpoint": "/dashboard",
-            "scopes": ["dash.previewRead"]
-        }
     },
     "metadata": {
         "b2cDomain": "projectcentredavidev.b2clogin.com",
@@ -23,5 +17,11 @@
         "validateIssuer": true,
         "passReqToCallback": false,
         "loggingLevel": "info"
+    },
+    "protectedRoutes": {
+        "dashboard": {
+            "endpoint": "/dashboard",
+            "scopes": ["dash.previewRead"]
+        }
     }
 }
