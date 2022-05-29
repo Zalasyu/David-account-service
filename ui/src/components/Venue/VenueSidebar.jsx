@@ -7,8 +7,8 @@ import { BiCog } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import SidebarMenu from "./SidebarMenu";
-import '../styles/Sidebar.css';
+import SidebarMenu from "../ForAll/SidebarMenu";
+import '../../styles/Sidebar.css';
 
 const routes = [
   {

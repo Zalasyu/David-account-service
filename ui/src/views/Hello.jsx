@@ -20,13 +20,16 @@ const HelloContent = () => {
 
     useEffect(() => {
         if (account && inProgress === "none" && !helloData) {
+            // Acquire an access token.
             instance.acquireTokenSilent({
                 scopes: protectedResources.apiDashboard.scopes,
                 account: account
             }).then((response) => {
+                console.log("Did we get a response from the acquireTokenSilent? ")
                 callApiWithToken(response.accessToken, protectedResources.apiDashboard.endpoint)
                     .then(response => setHelloData(response));
             }).catch((error) => {
+
                 // in case if silent token acquisition fails, fallback to an interactive method
                 if (error instanceof InteractionRequiredAuthError) {
                     if (account && inProgress === "none") {
