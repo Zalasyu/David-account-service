@@ -1,6 +1,6 @@
 
 import "../styles/App.css";
-import { protectedResources } from "../auth/authConfig";
+import { protectedResources } from "../../auth/authConfig";
 
 export const HelloData = (props) => {
     const tableRows = Object.entries(props.helloData).map((entry, index) => {

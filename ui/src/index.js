@@ -14,7 +14,7 @@ import { PublicClientApplication } from "@azure/msal-browser";
 import { msalConfig } from './auth/authConfig';
 
 // Tell ReactDOM to use this configuration and MSAL instance
-export const msalInstance = new PublicClientApplication(msalConfig);
+const msalInstance = new PublicClientApplication(msalConfig);
 
 
 ReactDOM.render(
@@ -22,4 +22,4 @@ ReactDOM.render(
     <App pca={msalInstance} />
   </React.StrictMode>, 
   document.getElementById('root')
-  );
+);

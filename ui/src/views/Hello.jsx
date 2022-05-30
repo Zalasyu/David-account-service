@@ -5,7 +5,7 @@ import { InteractionRequiredAuthError, InteractionType } from "@azure/msal-brows
 
 import { loginRequest, protectedResources } from "../auth/authConfig";
 import { callApiWithToken } from "../fetch";
-import { HelloData } from "../components/DataDisplay";
+import { HelloData } from "../components/ForTesting/DataDisplay";
 
 const HelloContent = () => {
     /**
