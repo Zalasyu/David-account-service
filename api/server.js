@@ -6,6 +6,7 @@ const passport = require('passport')
 const logger = require('morgan')
 const config = require('./config/config.json')
 const { MongoUnexpectedServerResponseError } = require('mongodb')
+const { UsageState } = require('webpack')
 
 // Import environment variables
 require('dotenv').config()
@@ -31,18 +32,8 @@ const bearerStrategy = new BearerStrategy(options, (token, done) => {
   // Send user info using the second argument.
   console.log('Verifying the User');
   console.log(`${token} was retrieved.`);
-  findById(token.oid, function (err, user) {
-    if (err){
-      return done(err);
-    }
-    if (!user) {
-      console.log('User was added automatically as they were new.');
-      console.log("Their oid is: ", token.oid);
-      
-    }
   }
-
-});
+);
 
 // Print to stdout the envionment and port that the app is running in.
 console.log('ENV:::', process.env.ENVIRONMENT)
@@ -81,6 +72,7 @@ app.get('/public', (req, res) => res.send({ 'test-date': new Date() }))
 // Passport.authenticate Options:
 // 'session: false' = If we don't want a persistent login session
 
+// TODO: Create Routes that contains more logic.
 app.get('/dashboard',
   passport.authenticate('oauth-bearer'),
   (req, res) => {
@@ -97,7 +89,7 @@ app.get('/dashboard',
 )
 
 // Starts listenting on port 3080
-const port = process.env.PORT || 3080
+const port = process.env.PORT || 3001
 
 app.listen(port, () => {
   console.log(`Server listening on the port  ${port}`)
